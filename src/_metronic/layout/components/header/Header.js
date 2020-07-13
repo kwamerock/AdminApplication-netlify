@@ -5,6 +5,7 @@ import { toAbsoluteUrl } from "../../../_helpers";
 import { useHtmlClassService } from "../../_core/MetronicLayout";
 import { Topbar } from "./Topbar";
 import { HeaderMenuWrapper } from "./header-menu/HeaderMenuWrapper";
+import { HeaderSelector } from "../extras/dropdowns/HeaderSelector";
 
 export function Header() {
   const uiService = useHtmlClassService();
@@ -52,7 +53,7 @@ export function Header() {
             </div>
             {/* end::Header Logo */}
 
-            {/* TODO: put selector here */}
+            <HeaderSelector />
           </div>
           {/* end::Left */}
 

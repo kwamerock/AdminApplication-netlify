@@ -67,7 +67,7 @@ export function SubHeader() {
           {/* begin::Heading */}
           <div className="d-flex flex-column">
             {/* begin::Title */}
-            <h2 className="text-white font-weight-bold my-2 mr-5">
+            <h2 className="text-dark font-weight-bold my-2 mr-5">
               {subheader.title}
             </h2>
             {/* end::Title */}
@@ -81,7 +81,7 @@ export function SubHeader() {
         <div className="d-flex align-items-center">
           <button
             type="button"
-            className="btn btn-transparent-white font-weight-bold  py-3 px-6 mr-4"
+            className="btn btn-transparent-dark font-weight-bold  py-3 px-6 mr-4"
           >
             Reports
           </button>

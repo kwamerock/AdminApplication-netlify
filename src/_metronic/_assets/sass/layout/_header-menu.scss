@@ -59,14 +59,39 @@
 						}
 					}
 				}
-
-				// Active & Hover States
+				
+				// Hover State
 				&:hover:not(.menu-item-here):not(.menu-item-active),
-				&.menu-item-hover:not(.menu-item-here):not(.menu-item-active),
+				&.menu-item-hover:not(.menu-item-here):not(.menu-item-active) {
+					> .menu-link {
+						background-color: $primary-hover;
+
+						.menu-text {
+							color: $white;
+						}
+
+						.menu-arrow {
+							color: rgba($white, 0.8);
+						}
+
+						.menu-icon {
+							i {
+								color: rgba($white, 0.8);
+							}
+
+							.svg-icon {
+								@include svg-icon-color(rgba($white, 0.8));
+							}
+						}
+					}
+				}
+
+				// Active
+				
 				&.menu-item-here,
 				&.menu-item-active {
 					> .menu-link {
-						background-color: rgba($white, 0.1);
+						background-color: $primary;
 
 						.menu-text {
 							color: $white;

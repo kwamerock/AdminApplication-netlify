@@ -5,6 +5,17 @@
 
 // Desktop Mode
 @include media-breakpoint-up(lg) {
+	
+	.header-dropdown-container {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		height: 100%;
+		flex-direction: column;
+		justify-content: center;
+		align-content: center;
+	}
+
 	// Base
 	.header {
 		display: flex;
@@ -80,6 +91,14 @@
 		.header-logo {
 			display: none;
 		}
+	}
+
+	.header.header-fixed {
+		background-color: get($header-config, desktop, fixed, bg-color);
+	}
+
+	.header-dropdown-container {
+		display: none;
 	}
 }
 
