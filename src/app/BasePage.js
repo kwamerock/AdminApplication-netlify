@@ -1,9 +1,16 @@
 import React, {Suspense, lazy} from "react";
 import {Redirect, Switch, Route} from "react-router-dom";
 import {LayoutSplashScreen, ContentRoute} from "../_metronic/layout";
-import {BuilderPage} from "./pages/BuilderPage";
 import {MyPage} from "./pages/MyPage";
 import {DashboardPage} from "./pages/DashboardPage";
+import {SitesPage} from "./pages/SitesPage";
+import {BuildsPage} from "./pages/BuildsPage";
+import {PluginsPage} from "./pages/PluginsPage";
+import {DomainsPage} from "./pages/DomainsPage";
+import {MembersPage} from "./pages/MembersPage";
+import {AuditLogPage} from "./pages/AuditLogPage";
+import {BillingPage} from "./pages/BillingPage";
+import {TeamSettingsPage} from "./pages/TeamSettingsPage";
 
 const GoogleMaterialPage = lazy(() =>
   import("./modules/GoogleMaterialExamples/GoogleMaterialPage")
@@ -29,7 +36,14 @@ export default function BasePage() {
                     <Redirect exact from="/" to="/dashboard"/>
                 }
                 <ContentRoute path="/dashboard" component={DashboardPage}/>
-                <ContentRoute path="/builder" component={BuilderPage}/>
+                <ContentRoute path="/sites" component={SitesPage}/>
+                <ContentRoute path="/builds" component={BuildsPage}/>
+                <ContentRoute path="/plugins" component={PluginsPage}/>
+                <ContentRoute path="/domains" component={DomainsPage}/>
+                <ContentRoute path="/members" component={MembersPage}/>
+                <ContentRoute path="/auditLog" component={AuditLogPage}/>
+                <ContentRoute path="/billing" component={BillingPage}/>
+                <ContentRoute path="/teamSettings" component={TeamSettingsPage}/>
                 <ContentRoute path="/my-page" component={MyPage}/>
                 <Route path="/google-material" component={GoogleMaterialPage}/>
                 <Route path="/react-bootstrap" component={ReactBootstrapPage}/>

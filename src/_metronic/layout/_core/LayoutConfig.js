@@ -124,7 +124,7 @@ export function getInitLayoutConfig() {
     },
     aside: {
       self: {
-        display: false,
+        display: true,
       },
       menu: {
         dropdown: false, // ok
