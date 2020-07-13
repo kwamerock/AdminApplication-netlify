@@ -51,13 +51,34 @@ export function Header() {
               </Link>
             </div>
             {/* end::Header Logo */}
-            {layoutProps.menuHeaderDisplay && <HeaderMenuWrapper />}
+
+            {/* TODO: put selector here */}
           </div>
           {/* end::Left */}
 
           {/*begin::Topbar*/}
           <Topbar />
           {/*end::Topbar*/}
+        </div>
+        {/*end::Container*/}
+      </div>
+
+      <div
+        className={`header-bottom ${layoutProps.headerClasses}`}
+        id="kt_header_bottom"
+        {...layoutProps.headerAttributes}
+      >
+        {/*begin::Container*/}
+        <div
+          className={` ${layoutProps.headerContainerClasses} d-flex align-items-stretch justify-content-between`}
+        >
+          {/* begin::Left */}
+          <div className="d-flex align-items-stretch mr-3">
+            {/* end::Header Logo */}
+            {layoutProps.menuHeaderDisplay && <HeaderMenuWrapper />}
+          </div>
+          {/* end::Left */}
+
         </div>
         {/*end::Container*/}
       </div>

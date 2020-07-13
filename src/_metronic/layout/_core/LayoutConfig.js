@@ -15,7 +15,7 @@ export function getInitLayoutConfig() {
         theme: {
           base: {
             white: "#ffffff",
-            primary: "#6993FF",
+            primary: "#3445E5",
             secondary: "#E5EAEE",
             success: "#1BC5BD",
             info: "#8950FC",
@@ -65,7 +65,7 @@ export function getInitLayoutConfig() {
     self: {
       layout: "default", // blank/default page mode
       body: {
-        backgroundImage: "bg/bg-10.jpg",
+        
       },
     },
     // == Page Splash Screen loading
