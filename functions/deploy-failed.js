@@ -22,7 +22,7 @@ exports.handler = async (event, context) => {
         ],
         "attachments": [
             {
-                "color": "#0d66a6",
+                "color": process.env.SLACK_BOT_THEME_COLOR,
                 "blocks": [
 	                {
 			            "type": "section",
