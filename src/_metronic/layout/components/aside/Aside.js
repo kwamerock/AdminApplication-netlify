@@ -2,10 +2,18 @@ import React, {useMemo} from "react";
 import objectPath from "object-path";
 import {AsideMenu} from "./aside-menu/AsideMenu";
 import {useHtmlClassService} from "../../_core/MetronicLayout";
+import {checkIsActive} from "../../../_helpers";
+import {useLocation} from "react-router";
 
 export function Aside() {
   const uiService = useHtmlClassService();
-
+  const location = useLocation();
+  const shouldRender = (urls) => {
+    return urls.some(x => checkIsActive(location, x))
+    ? ""
+    : "d-none width-none";
+        
+  };
   const layoutProps = useMemo(() => {
     return {
       disableScroll:
@@ -22,7 +30,7 @@ export function Aside() {
       <>
         {/* begin::Aside */}
         <div id="kt_aside"
-             className={`aside aside-left ${layoutProps.asideClassesFromConfig} d-flex flex-column flex-row-auto`}>
+             className={`aside aside-left ${layoutProps.asideClassesFromConfig} d-flex flex-column flex-row-auto ${shouldRender(['/billing', '/teamSettings'])}`}>
           {/* begin::Aside Menu */}
           <div id="kt_aside_menu_wrapper" className="aside-menu-wrapper flex-column-fluid">
             <AsideMenu disableScroll={layoutProps.disableScroll}/>

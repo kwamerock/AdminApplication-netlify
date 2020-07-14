@@ -4,6 +4,7 @@ import {useHtmlClassService} from "../../../_core/MetronicLayout";
 
 export function AsideMenu({disableScroll}) {
   const uiService = useHtmlClassService();
+
   const layoutProps = useMemo(() => {
     return {
       layoutConfig: uiService.config,
@@ -19,7 +20,7 @@ export function AsideMenu({disableScroll}) {
       <div
         id="kt_aside_menu"
         data-menu-vertical="1"
-        className={`aside-menu  min-h-lg-800px ${layoutProps.asideClassesFromConfig}`}
+        className={`aside-menu  min-h-lg-800px ${layoutProps.asideClassesFromConfig}}`}
         {...layoutProps.asideMenuAttr}
       >
         <AsideMenuList layoutProps={layoutProps} />
