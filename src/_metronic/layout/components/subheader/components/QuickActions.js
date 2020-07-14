@@ -7,17 +7,7 @@ import { DropdownMenu4 } from "../../../../_partials/dropdowns";
 
 const QuickActionsDropdownToggle = forwardRef((props, ref) => {
   return (
-    <button
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        props.onClick(e);
-      }}
-      id="kt_subheader_quick_actions"
-      className="btn btn-white font-weight-bold py-3 px-6"
-    >
-      Actions
-    </button>
+    <></>
   );
 });
 
