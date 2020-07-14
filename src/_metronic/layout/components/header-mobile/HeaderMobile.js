@@ -4,6 +4,7 @@ import objectPath from "object-path";
 import SVG from "react-inlinesvg";
 import { toAbsoluteUrl } from "../../../_helpers";
 import { useHtmlClassService } from "../../_core/MetronicLayout";
+import { HeaderSelector } from "../extras/dropdowns/HeaderSelector";
 
 export function HeaderMobile() {
   const uiService = useHtmlClassService();
@@ -27,16 +28,18 @@ export function HeaderMobile() {
         className={`header-mobile ${layoutProps.headerMobileCssClasses}`}
         {...layoutProps.headerMobileAttributes}
       >
-        {/* begin::Logo */}
-        <Link to="/">
-          <img
-            alt="Logo"
-            className="logo-default max-h-30px"
-            src={toAbsoluteUrl("/media/logos/logo-letter-1.png")}
-          />
-        </Link>
-        {/* end::Logo */}
-
+        <div className="d-flex">
+          {/* begin::Logo */}
+          <Link to="/">
+            <img
+              alt="Logo"
+              className="logo-default max-h-30px mr-8"
+              src={toAbsoluteUrl("/media/logos/logo-letter-9.png")}
+            />
+          </Link>
+          {/* end::Logo */}
+          <HeaderSelector />
+        </div>
         {/* begin::Toolbar */}
         <div className="d-flex align-items-center">
           {layoutProps.asideDisplay && (
@@ -50,7 +53,7 @@ export function HeaderMobile() {
 
           {layoutProps.headerMenuSelfDisplay && (
             <button
-              className="btn p-0 burger-icon burger-icon-left ml-4"
+              className="btn p-0 burger-icon burger-icon ml-4"
               id="kt_header_mobile_toggle"
             >
               <span />

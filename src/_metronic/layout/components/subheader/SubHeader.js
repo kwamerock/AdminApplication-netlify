@@ -33,9 +33,9 @@ export function SubHeader() {
   useLayoutEffect(() => {
     const aside = getBreadcrumbsAndTitle("kt_aside_menu", location.pathname);
     const header = getBreadcrumbsAndTitle("kt_header_menu", location.pathname);
-    const breadcrumbs = (aside && aside.breadcrumbs.length > 0) ? /*aside.breadcrumbs*/ header.breadcrumbs : header.breadcrumbs;
+    const breadcrumbs = (aside && aside.breadcrumbs.length > 0) ? aside.breadcrumbs : header.breadcrumbs;
     subheader.setBreadcrumbs(breadcrumbs);
-    subheader.setTitle((aside && aside.title && aside.title.length > 0) ? /*aside.title*/ header.title : header.title);
+    subheader.setTitle((aside && aside.title && aside.title.length > 0) ? aside.title : header.title);
      // eslint-disable-next-line
   }, [location.pathname]);
 

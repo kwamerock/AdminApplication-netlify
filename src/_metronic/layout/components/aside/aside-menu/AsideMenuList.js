@@ -26,19 +26,19 @@ export function AsideMenuList({ layoutProps }) {
       {/*begin::1 Level*/}
       <li
           className={`menu-item menu-item-submenu ${getMenuItemActive(
-              "/billing", true
+              "/billing/General", true
           )}`}
           aria-haspopup="true"
           data-menu-toggle="hover"
       >
-        <NavLink className="menu-link menu-toggle" to="/billing">
+        <NavLink className="menu-link" to="/billing/General">
         <span className="svg-icon menu-icon">
           <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")}/>
         </span>
           <span className="menu-text">General</span>
           <i className="menu-arrow"/>
         </NavLink>
-        <div className="menu-submenu ">
+        <div className={`menu-submenu ${getMenuItemActive("/billing/General", true)}`}>
           <i className="menu-arrow"/>
           <ul className="menu-subnav">
             <li className="menu-item  menu-item-parent" aria-haspopup="true">
@@ -51,12 +51,12 @@ export function AsideMenuList({ layoutProps }) {
             {/*begin::2 Level*/}
             <li
                 className={`menu-item menu-item-submenu ${getMenuItemActive(
-                    "/general#currentServices", true
+                    "/billing/General/currentServices", true
                 )}`}
                 aria-haspopup="true"
                 data-menu-toggle="hover"
             >
-              <NavLink className="menu-link menu-toggle" to="/billing#currentServices">
+              <NavLink className="menu-link menu-toggle" to="/billing/General/currentServices">
                 <i className="menu-bullet menu-bullet-dot">
                   <span/>
                 </i>
@@ -66,12 +66,12 @@ export function AsideMenuList({ layoutProps }) {
             </li>
             <li
                 className={`menu-item menu-item-submenu ${getMenuItemActive(
-                    "/general#invoices", true
+                    "/billing/General/invoices", true
                 )}`}
                 aria-haspopup="true"
                 data-menu-toggle="hover"
             >
-              <NavLink className="menu-link menu-toggle" to="/billing#invoices">
+              <NavLink className="menu-link menu-toggle" to="/billing/General/invoices">
                 <i className="menu-bullet menu-bullet-dot">
                   <span/>
                 </i>
@@ -81,12 +81,12 @@ export function AsideMenuList({ layoutProps }) {
             </li>
             <li
                 className={`menu-item menu-item-submenu ${getMenuItemActive(
-                    "/general#billingDetails", true
+                    "/billing/General/billingDetails", true
                 )}`}
                 aria-haspopup="true"
                 data-menu-toggle="hover"
             >
-              <NavLink className="menu-link menu-toggle" to="/billing#billingDetails">
+              <NavLink className="menu-link menu-toggle" to="/billing/General/billingDetails">
                 <i className="menu-bullet menu-bullet-dot">
                   <span/>
                 </i>
@@ -131,12 +131,12 @@ export function AsideMenuList({ layoutProps }) {
             {/*begin::2 Level*/}
             <li
                 className={`menu-item menu-item-submenu ${getMenuItemActive(
-                    "/teamSettings/General#teamDetails", true
+                    "/teamSettings/General/teamDetails", true
                 )}`}
                 aria-haspopup="true"
                 data-menu-toggle="hover"
             >
-              <NavLink className="menu-link menu-toggle" to="/teamSettings/General#teamDetails">
+              <NavLink className="menu-link menu-toggle" to="/teamSettings/General/teamDetails">
                 <i className="menu-bullet menu-bullet-dot">
                   <span/>
                 </i>
@@ -146,12 +146,12 @@ export function AsideMenuList({ layoutProps }) {
             </li>
             <li
                 className={`menu-item menu-item-submenu ${getMenuItemActive(
-                    "/teamSettings/General#dangerZone", true
+                    "/teamSettings/General/dangerZone", true
                 )}`}
                 aria-haspopup="true"
                 data-menu-toggle="hover"
             >
-              <NavLink className="menu-link menu-toggle" to="/teamSettings/General#dangerZone">
+              <NavLink className="menu-link menu-toggle" to="/teamSettings/General/dangerZone">
                 <i className="menu-bullet menu-bullet-dot">
                   <span/>
                 </i>
@@ -194,12 +194,12 @@ export function AsideMenuList({ layoutProps }) {
             {/*begin::2 Level*/}
             <li
                 className={`menu-item menu-item-submenu ${getMenuItemActive(
-                    "/teamSettings/Sites#globalSiteSettings", true
+                    "/teamSettings/Sites/globalSiteSettings", true
                 )}`}
                 aria-haspopup="true"
                 data-menu-toggle="hover"
             >
-              <NavLink className="menu-link menu-toggle" to="/teamSettings/Sites#globalSiteSettings">
+              <NavLink className="menu-link menu-toggle" to="/teamSettings/Sites/globalSiteSettings">
                 <i className="menu-bullet menu-bullet-dot">
                   <span/>
                 </i>
@@ -209,12 +209,12 @@ export function AsideMenuList({ layoutProps }) {
             </li>
             <li
                 className={`menu-item menu-item-submenu ${getMenuItemActive(
-                    "/teamSettings/Sites#notifications", true
+                    "/teamSettings/Sites/notifications", true
                 )}`}
                 aria-haspopup="true"
                 data-menu-toggle="hover"
             >
-              <NavLink className="menu-link menu-toggle" to="/teamSettings/Sites#notifications">
+              <NavLink className="menu-link menu-toggle" to="/teamSettings/Sites/notifications">
                 <i className="menu-bullet menu-bullet-dot">
                   <span/>
                 </i>

@@ -5,7 +5,7 @@ export const DropdownButtonToggler = React.forwardRef((props, ref) => {
   return (
     <a
       ref={ref}
-      className="btn btn-primary dropdown-toggle"
+      className="btn btn-hover-primary dropdown-toggle"
       onClick={e => {
         e.preventDefault();
         props.onClick(e);

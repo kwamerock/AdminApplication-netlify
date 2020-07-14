@@ -100,6 +100,10 @@
 	.header-dropdown-container {
 		display: none;
 	}
+
+	.header-mobile .header-dropdown-container {
+		display: block;
+	}
 }
 
 .header-bottom {

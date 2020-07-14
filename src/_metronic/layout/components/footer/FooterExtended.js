@@ -123,7 +123,7 @@ export function FooterExtended({
             <div className="d-flex align-items-center order-lg-1 order-2">
               <img
                 alt="Logo"
-                src={toAbsoluteUrl("/media/logos/logo-letter-1.png")}
+                src={toAbsoluteUrl("/media/logos/logo-letter-9.png")}
                 className="logo-sticky max-h-35px"
               />
               <span className="text-muted font-weight-bold mx-2">
