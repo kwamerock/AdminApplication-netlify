@@ -1,8 +1,5 @@
 import React, { useMemo } from "react";
 import objectPath from "object-path";
-import SVG from "react-inlinesvg";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import { toAbsoluteUrl } from "../../../_helpers";
 import { useHtmlClassService } from "../../_core/MetronicLayout";
 import { QuickActionsDropdown } from "../extras/dropdowns/QuickActionsDropdown";
 import { QuickUserToggler } from "../extras/QuiclUserToggler";
