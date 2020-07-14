@@ -47,7 +47,7 @@ export function getLastLocation() {
 }
 
 export function getCurrentUrl(location) {
-    return location.pathname.split(/[?#]/)[0];
+    return location.pathname + location.hash;
 }
 
 export function checkIsActive(location, url) {
@@ -59,7 +59,7 @@ export function checkIsActive(location, url) {
     if (current === url) {
         return  true;
     }
-
+    
     if (current.indexOf(url) > -1) {
         return true;
     }

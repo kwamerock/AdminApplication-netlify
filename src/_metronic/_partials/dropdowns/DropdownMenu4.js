@@ -6,19 +6,19 @@ export function DropdownMenu4() {
         {/*begin::Navigation*/}
         <ul className="navi navi-hover py-5">
             <li className="navi-item">
-                <a href="#" className="navi-link">
+                <a href="/sites" className="navi-link">
                     <span className="navi-icon"><i className="flaticon2-drop"></i></span>
                     <span className="navi-text">New Group</span>
                 </a>
             </li>
             <li className="navi-item">
-                <a href="#" className="navi-link">
+                <a href="/sites" className="navi-link">
                     <span className="navi-icon"><i className="flaticon2-list-3"></i></span>
                     <span className="navi-text">Contacts</span>
                 </a>
             </li>
             <li className="navi-item">
-                <a href="#" className="navi-link">
+                <a href="/sites" className="navi-link">
                     <span className="navi-icon"><i className="flaticon2-rocket-1"></i></span>
                     <span className="navi-text">Groups</span>
                     <span className="navi-link-badge">
@@ -27,13 +27,13 @@ export function DropdownMenu4() {
                 </a>
             </li>
             <li className="navi-item">
-                <a href="#" className="navi-link">
+                <a href="/sites" className="navi-link">
                     <span className="navi-icon"><i className="flaticon2-bell-2"></i></span>
                     <span className="navi-text">Calls</span>
                 </a>
             </li>
             <li className="navi-item">
-                <a href="#" className="navi-link">
+                <a href="/sites" className="navi-link">
                     <span className="navi-icon"><i className="flaticon2-gear"></i></span>
                     <span className="navi-text">Settings</span>
                 </a>
@@ -42,13 +42,13 @@ export function DropdownMenu4() {
             <li className="navi-separator my-3"></li>
 
             <li className="navi-item">
-                <a href="#" className="navi-link">
+                <a href="/sites" className="navi-link">
                     <span className="navi-icon"><i className="flaticon2-magnifier-tool"></i></span>
                     <span className="navi-text">Help</span>
                 </a>
             </li>
             <li className="navi-item">
-                <a href="#" className="navi-link">
+                <a href="/sites" className="navi-link">
                     <span className="navi-icon"><i className="flaticon2-bell-2"></i></span>
                     <span className="navi-text">Privacy</span>
                     <span className="navi-link-badge">
