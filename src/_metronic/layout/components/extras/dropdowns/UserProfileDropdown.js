@@ -73,7 +73,7 @@ export function UserProfileDropdown() {
           </>
 
           <div className="navi navi-spacer-x-0 pt-5">
-            <a className="navi-item px-8">
+            <a className="navi-item px-8" href="/Sites">
               <div className="navi-link">
                 <div className="navi-icon mr-2">
                   <i className="flaticon2-calendar-3 text-success"/>
@@ -90,7 +90,7 @@ export function UserProfileDropdown() {
               </div>
             </a>
 
-            <a className="navi-item px-8">
+            <a className="navi-item px-8" href="/Sites">
               <div className="navi-link">
                 <div className="navi-icon mr-2">
                   <i className="flaticon2-mail text-warning"></i>
@@ -106,7 +106,7 @@ export function UserProfileDropdown() {
               </div>
             </a>
 
-            <a className="navi-item px-8">
+            <a className="navi-item px-8" href="/Sites">
               <div className="navi-link">
                 <div className="navi-icon mr-2">
                   <i className="flaticon2-rocket-1 text-danger"></i>
@@ -122,7 +122,7 @@ export function UserProfileDropdown() {
               </div>
             </a>
 
-            <a className="navi-item px-8">
+            <a className="navi-item px-8" href="/Sites">
               <div className="navi-link">
                 <div className="navi-icon mr-2">
                   <i className="flaticon2-hourglass text-primary"></i>
