@@ -56,7 +56,7 @@ export function AsideMenuList({ layoutProps }) {
                 aria-haspopup="true"
                 data-menu-toggle="hover"
             >
-              <NavLink className="menu-link menu-toggle" to="/billing/General/currentServices">
+              <NavLink className="menu-link" to="/billing/General/currentServices">
                 <i className="menu-bullet menu-bullet-dot">
                   <span/>
                 </i>
@@ -71,7 +71,7 @@ export function AsideMenuList({ layoutProps }) {
                 aria-haspopup="true"
                 data-menu-toggle="hover"
             >
-              <NavLink className="menu-link menu-toggle" to="/billing/General/invoices">
+              <NavLink className="menu-link" to="/billing/General/invoices">
                 <i className="menu-bullet menu-bullet-dot">
                   <span/>
                 </i>
@@ -86,7 +86,7 @@ export function AsideMenuList({ layoutProps }) {
                 aria-haspopup="true"
                 data-menu-toggle="hover"
             >
-              <NavLink className="menu-link menu-toggle" to="/billing/General/billingDetails">
+              <NavLink className="menu-link" to="/billing/General/billingDetails">
                 <i className="menu-bullet menu-bullet-dot">
                   <span/>
                 </i>
@@ -136,7 +136,7 @@ export function AsideMenuList({ layoutProps }) {
                 aria-haspopup="true"
                 data-menu-toggle="hover"
             >
-              <NavLink className="menu-link menu-toggle" to="/teamSettings/General/teamDetails">
+              <NavLink className="menu-link" to="/teamSettings/General/teamDetails">
                 <i className="menu-bullet menu-bullet-dot">
                   <span/>
                 </i>
@@ -151,7 +151,7 @@ export function AsideMenuList({ layoutProps }) {
                 aria-haspopup="true"
                 data-menu-toggle="hover"
             >
-              <NavLink className="menu-link menu-toggle" to="/teamSettings/General/dangerZone">
+              <NavLink className="menu-link" to="/teamSettings/General/dangerZone">
                 <i className="menu-bullet menu-bullet-dot">
                   <span/>
                 </i>
@@ -199,7 +199,7 @@ export function AsideMenuList({ layoutProps }) {
                 aria-haspopup="true"
                 data-menu-toggle="hover"
             >
-              <NavLink className="menu-link menu-toggle" to="/teamSettings/Sites/globalSiteSettings">
+              <NavLink className="menu-link" to="/teamSettings/Sites/globalSiteSettings">
                 <i className="menu-bullet menu-bullet-dot">
                   <span/>
                 </i>
@@ -214,7 +214,7 @@ export function AsideMenuList({ layoutProps }) {
                 aria-haspopup="true"
                 data-menu-toggle="hover"
             >
-              <NavLink className="menu-link menu-toggle" to="/teamSettings/Sites/notifications">
+              <NavLink className="menu-link" to="/teamSettings/Sites/notifications">
                 <i className="menu-bullet menu-bullet-dot">
                   <span/>
                 </i>
