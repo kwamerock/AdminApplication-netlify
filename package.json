@@ -1,8 +1,8 @@
 {
-    "name": "demo2",
+    "name": "Canvas",
     "version": "7.0.6",
     "private": true,
-    "homepage": "/metronic/react/demo2",
+    "homepage": "https://app.withcanvas.com",
     "scripts": {
         "start": "react-scripts start -o",
         "build": "react-scripts build",
