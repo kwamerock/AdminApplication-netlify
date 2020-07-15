@@ -2,13 +2,21 @@ import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import objectPath from "object-path";
 import SVG from "react-inlinesvg";
+import { useLocation } from "react-router-dom";
 import { toAbsoluteUrl } from "../../../_helpers";
 import { useHtmlClassService } from "../../_core/MetronicLayout";
 import { HeaderSelector } from "../extras/dropdowns/HeaderSelector";
+import {checkIsActive} from "../../../_helpers";
 
 export function HeaderMobile() {
   const uiService = useHtmlClassService();
-
+  const location = useLocation();
+  const shouldRender = (urls) => {
+    return urls.some(x => checkIsActive(location, x))
+    ? ""
+    : "d-none width-none";
+        
+  };
   const layoutProps = useMemo(() => {
     return {
       headerLogo: uiService.getStickyLogo(),
@@ -41,10 +49,10 @@ export function HeaderMobile() {
           <HeaderSelector />
         </div>
         {/* begin::Toolbar */}
-        <div className="d-flex align-items-center">
+        <div className={`d-flex align-items-center`}>
           {layoutProps.asideDisplay && (
             <button
-              className="btn p-0 burger-icon burger-icon-left"
+              className={`btn p-0 burger-icon burger-icon-left ${shouldRender(["/billing", "/teamSettings"])}`}
               id="kt_aside_mobile_toggle"
             >
               <span />
