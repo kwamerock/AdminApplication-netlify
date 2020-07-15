@@ -455,9 +455,7 @@
 			// general submenu
 			.menu-inner,
 			.menu-submenu {
-				max-height: 0;
-				overflow: hidden;
-				transition: max-height 0.5s ease;
+				display: none;
 				float: none;
 				margin: 0;
 				padding: 0;
@@ -572,7 +570,7 @@
 
 					> .menu-submenu,
 					> .menu-inner {
-						max-height: 200px;
+						display: flex;
 						flex-grow: 1;
 						flex-direction: column;
 					}

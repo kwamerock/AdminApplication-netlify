@@ -31,14 +31,14 @@ export function AsideMenuList({ layoutProps }) {
           aria-haspopup="true"
           data-menu-toggle="hover"
       >
-        <NavLink className="menu-link" to="/billing/General">
+        <NavLink className="menu-link menu-toggle" to="/billing/General">
         <span className="svg-icon menu-icon">
           <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")}/>
         </span>
           <span className="menu-text">General</span>
           <i className="menu-arrow"/>
         </NavLink>
-        <div className={`menu-submenu ${getMenuItemActive("/billing/General", true)}`}>
+        <div className={`menu-submenu`}>
           <i className="menu-arrow"/>
           <ul className="menu-subnav">
             <li className="menu-item  menu-item-parent" aria-haspopup="true">
@@ -111,14 +111,14 @@ export function AsideMenuList({ layoutProps }) {
           aria-haspopup="true"
           data-menu-toggle="hover"
       >
-        <NavLink className="menu-link" to="/teamSettings/General">
+        <NavLink className="menu-link menu-toggle" to="/teamSettings/General">
         <span className="svg-icon menu-icon">
           <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")}/>
         </span>
           <span className="menu-text">General</span>
           <i className="menu-arrow"/>
         </NavLink>
-        <div className={`menu-submenu  ${getMenuItemActive("/teamSettings/General", true)}`}>
+        <div className={`menu-submenu`}>
           <i className="menu-arrow"/>
           <ul className="menu-subnav">
             <li className="menu-item  menu-item-parent" aria-haspopup="true">
@@ -167,6 +167,7 @@ export function AsideMenuList({ layoutProps }) {
         
       </li>
 
+      
       <li
           className={`menu-item menu-item-submenu ${getMenuItemActive(
               "/teamSettings/Sites", true
@@ -174,14 +175,14 @@ export function AsideMenuList({ layoutProps }) {
           aria-haspopup="true"
           data-menu-toggle="hover"
       >
-        <NavLink className="menu-link" to="/teamSettings/Sites">
+        <NavLink className="menu-link menu-toggle" to="/teamSettings/Sites">
         <span className="svg-icon menu-icon">
           <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")}/>
         </span>
           <span className="menu-text">Sites</span>
           <i className="menu-arrow"/>
         </NavLink>
-        <div className={`menu-submenu ${getMenuItemActive("/teamSettings/Sites", true)}`}>
+        <div className={`menu-submenu`}>
           <i className="menu-arrow"/>
           <ul className="menu-subnav">
             <li className="menu-item  menu-item-parent" aria-haspopup="true">
@@ -229,8 +230,9 @@ export function AsideMenuList({ layoutProps }) {
 
         
       </li>
-
+  
     </ul>
+    
 
     {/* end::Menu Nav */}
   </>
