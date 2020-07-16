@@ -3,6 +3,7 @@ import {Redirect, Switch, Route} from "react-router-dom";
 import {LayoutSplashScreen, ContentRoute} from "../_metronic/layout";
 import {MyPage} from "./pages/MyPage";
 import {DashboardPage} from "./pages/DashboardPage";
+import {ProfilePage} from "./pages/ProfilePage";
 import {SitesPage} from "./pages/SitesPage";
 import {BuildsPage} from "./pages/BuildsPage";
 import {PluginsPage} from "./pages/PluginsPage";
@@ -36,6 +37,7 @@ export default function BasePage() {
                     <Redirect exact from="/" to="/dashboard"/>
                 }
                 <ContentRoute path="/dashboard" component={DashboardPage}/>
+                <ContentRoute path="/profile" component={ProfilePage}/>
                 <ContentRoute path="/sites" component={SitesPage}/>
                 <ContentRoute path="/builds" component={BuildsPage}/>
                 <ContentRoute path="/plugins" component={PluginsPage}/>

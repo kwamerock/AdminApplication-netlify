@@ -14,7 +14,7 @@ function LoginCallback(props) {
     }
 
     loginFunc();
-  }, []); 
+  }); 
   
 //<Redirect to="/auth/login" />
   return (
