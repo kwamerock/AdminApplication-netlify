@@ -4,6 +4,7 @@ import {Link, Switch, Redirect} from "react-router-dom";
 import {toAbsoluteUrl} from "../../../../_metronic/_helpers";
 import {ContentRoute} from "../../../../_metronic/layout"
 import Login from "./Login";
+import LoginCallback from "./LoginCallback";
 import Registration from "./Registration";
 import ForgotPassword from "./ForgotPassword";
 import "../../../../_metronic/_assets/sass/pages/login/classic/login-1.scss";
@@ -84,6 +85,7 @@ export function AuthPage() {
               <div className="d-flex flex-column-fluid flex-center mt-30 mt-lg-0">
                 <Switch>
                 <ContentRoute path="/auth/login" component={Login}/>
+                <ContentRoute path="/auth/loginCallback" component={LoginCallback}/>
                 <ContentRoute path="/auth/registration" component={Registration}/>
                 <ContentRoute
                     path="/auth/forgot-password"

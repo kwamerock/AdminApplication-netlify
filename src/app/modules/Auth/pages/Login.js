@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { FormattedMessage, injectIntl } from "react-intl";
 import * as auth from "../_redux/authRedux";
 import { login } from "../_redux/authCrud";
-
+import auth0 from '../../../../plugins/auth0'
 /*
   INTL (i18n) docs:
   https://github.com/formatjs/react-intl/blob/master/docs/Components.md#formattedmessage
@@ -88,6 +88,12 @@ function Login(props) {
       }, 1000);
     },
   });
+
+  useEffect(() => {
+    auth0.loginWithRedirect().catch(() => {
+      console.error('error logging in');
+    });
+  }, []); 
 
   return (
     <div className="login-form login-signin" id="kt_login_signin_form">
