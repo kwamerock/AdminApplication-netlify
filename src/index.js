@@ -25,6 +25,9 @@ import {
   MetronicSubheaderProvider
 } from "./_metronic/layout";
 import {MetronicI18nProvider} from "./_metronic/i18n";
+import * as Sentry from '@sentry/react';
+
+Sentry.init({dsn: process.env.REACT_APP_SENTRY_DSN});
 
 /**
  * Base URL of the website.

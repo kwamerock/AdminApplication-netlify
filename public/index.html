@@ -11,6 +11,16 @@ License: You must have a valid license purchased only from https://themes.getboo
 -->
 <html lang="en">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=%REACT_APP_GA_TRACKING_ID%"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '%REACT_APP_GA_TRACKING_ID%');
+    </script>
+
     <meta charset="utf-8" />
     <title>Metronic | React Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
