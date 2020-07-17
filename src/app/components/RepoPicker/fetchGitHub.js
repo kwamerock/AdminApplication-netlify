@@ -1,4 +1,4 @@
-import { getAccessTokenGitHub } from "./getAccessToken";
+import { getAccessTokenGitHub } from "./accessToken";
 
 export const fetchGitHub = async (query, variables) => {
   const access_token = getAccessTokenGitHub();

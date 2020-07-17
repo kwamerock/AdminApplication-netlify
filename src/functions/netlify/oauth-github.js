@@ -43,7 +43,7 @@ exports.handler = async (event, context, callback) => {
       Location: `${REACT_APP_BASE_URL}/builds`,
       "Set-Cookie": `accessTokenGitHub=${encodeURIComponent(
         access_token
-      )}; Path=/`, // TODO: set expires/max-age, etc.?
+      )}; Path=/`, // TODO: set expires/max-age, etc.? otherwise it's a session cookie
     },
   });
 };

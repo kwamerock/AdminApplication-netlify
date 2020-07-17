@@ -15,11 +15,17 @@ const Item = ({ item, children, handleEvent }) => {
   return (
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <a
+      key={item.id}
       href="#"
       className="list-group-item list-group-item-action"
       onClick={handleEventBound}
     >
-      {children({ item })}
+      <div className="d-flex justify-content-between align-items-center">
+        {children({ item })}
+        <div className="ml-3">
+          <img src="/media/svg/icons/Navigation/Arrow-right.svg" alt="" />
+        </div>
+      </div>
     </a>
   );
 };
@@ -31,6 +37,8 @@ export const Step = ({
   getConnection,
   handleEvent,
   onSuccess,
+  onSignOut,
+  typePlural = "items",
 }) => {
   const variablesMemo = useMemo(
     () => variables,
@@ -40,10 +48,18 @@ export const Step = ({
 
   const fetchConnection = useCallback(
     async ({ cursor }) => {
-      const { data } = await fetchGitHub(query, {
+      const { res, data } = await fetchGitHub(query, {
         cursor,
         ...variables,
       });
+
+      if (!res.ok) {
+        if (res.status === 401 || res.status === 403) {
+          onSignOut();
+          return;
+        }
+        // TODO: Other error handling.
+      }
 
       if (data.errors) {
         return { errors: data.errors };
@@ -82,7 +98,7 @@ export const Step = ({
         There were errors:
         <div>
           {errors.map((error) => (
-            <div>{error.message}</div>
+            <div key={error.message}>{error.message}</div>
           ))}
         </div>
       </div>
@@ -91,13 +107,17 @@ export const Step = ({
 
   return (
     <div>
-      <div className="list-group">
-        {items.map((item) => (
-          <Item key={item.id} item={item} handleEvent={handleEvent}>
-            {children}
-          </Item>
-        ))}
-      </div>
+      {!isLoading && !items?.length ? (
+        <div className="my-3">No {typePlural} found.</div>
+      ) : (
+        <div className="list-group">
+          {items.map((item) => (
+            <Item key={item.id} item={item} handleEvent={handleEvent}>
+              {children}
+            </Item>
+          ))}
+        </div>
+      )}
       {!isLoading && hasNextPage && (
         <button
           className="btn btn-primary btn-block my-3"

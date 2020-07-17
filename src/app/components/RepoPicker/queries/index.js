@@ -1,5 +1,28 @@
 // https://developer.github.com/v4/explorer/
 
+export const queryOrgs = `
+query ($cursor: String) {
+  viewer {
+    login
+    avatarUrl
+    organizations(first: 10, after: $cursor) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        node {
+          id
+          name
+          login
+          avatarUrl
+        }
+      }
+    }
+  }
+}
+`;
+
 export const queryMyRepos = `
 query ($cursor: String) {
   viewer {
@@ -13,6 +36,7 @@ query ($cursor: String) {
         node {
           id
           name
+          isPrivate
           owner {
             login
           }
@@ -41,26 +65,7 @@ query ($cursor: String, $query: String!) {
         ... on Repository {
           id
           name
-        }
-      }
-    }
-  }
-}
-`;
-
-export const queryOrgs = `
-query ($cursor: String) {
-  viewer {
-    organizations(first: 10, after: $cursor) {
-      pageInfo {
-        hasNextPage
-        endCursor
-      }
-      edges {
-        node {
-          id
-          name
-          login
+          isPrivate
         }
       }
     }

@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
+import { Dropdown, Spinner } from "react-bootstrap";
 import { DebounceInput } from "react-debounce-input";
 import {
   queryOrgRepos,
@@ -7,48 +8,82 @@ import {
   querySearchRepos,
   queryOrgs,
 } from "./queries";
+import { fetchGitHub } from "./fetchGitHub";
 
 import { Step } from "./Step";
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
 const REACT_APP_GITHUB_APP_SLUG = process.env.REACT_APP_GITHUB_APP_SLUG;
 
-export function Steps() {
+const renderRepoItem = ({ item }) => (
+  <div className="d-flex justify-content-between w-100">
+    {item.name}{" "}
+    {item.isPrivate ? (
+      <span>
+        <img src="/media/svg/icons/General/Lock.svg" alt="" /> Private
+      </span>
+    ) : (
+      ""
+    )}
+  </div>
+);
+
+export function Steps({ onSignOut }) {
   const [step, setStep] = useState("init");
   const [owner, setOwner] = useState();
-  const [isOwnerMe, setIsOwnerMe] = useState();
+  const [viewer, setViewer] = useState();
+  const [isOwnerMe, setIsOwnerMe] = useState(true);
   const [repo, setRepo] = useState();
+  const [orgs, setOrgs] = useState([]);
   const [branch, setBranch] = useState();
-  const [repoKeyword, setRepoKeyword] = useState();
-  const [hasDoneError, setHasDoneError] = useState();
-  const [doneError, setDoneError] = useState();
+  const [repoKeyword, setRepoKeyword] = useState("");
+  const [hasError, setHasError] = useState();
+  const [error, setError] = useState();
 
   const handleClickReset = useCallback(() => {
-    setIsOwnerMe(undefined);
+    setIsOwnerMe(true);
     setOwner(undefined);
     setRepo(undefined);
     setBranch(undefined);
-    setRepoKeyword(undefined);
-    setHasDoneError(undefined);
-    setDoneError(undefined);
+    setRepoKeyword("");
+    setHasError(undefined);
+    setError(undefined);
     setStep("init");
-  }, [setStep]);
+  }, [
+    setOwner,
+    setRepo,
+    setBranch,
+    setRepoKeyword,
+    setHasError,
+    setError,
+    setStep,
+  ]);
 
-  const handleClickMine = useCallback(() => {
-    setIsOwnerMe(true);
-    setStep("repos");
-  }, [setStep]);
+  const handleClickMe = useCallback(
+    (e) => {
+      handleClickReset();
 
-  const handleClickOrgs = useCallback(() => {
-    setStep("orgs");
-  }, [setStep]);
+      setIsOwnerMe(true);
+
+      setOwner(viewer);
+    },
+    [viewer, setOwner, setIsOwnerMe, handleClickReset]
+  );
 
   const handleClickOrg = useCallback(
     (e, { item: clickedOrg }) => {
+      handleClickReset();
+
       setIsOwnerMe(false);
-      setOwner(clickedOrg.login);
+
+      const { login, avatarUrl } = clickedOrg;
+
+      setOwner({
+        login,
+        avatarUrl,
+      });
     },
-    [setOwner, setIsOwnerMe]
+    [setOwner, setIsOwnerMe, handleClickReset]
   );
 
   const handleClickRepo = useCallback(
@@ -72,7 +107,7 @@ export function Steps() {
             {
               method: "POST",
               body: JSON.stringify({
-                owner,
+                owner: owner?.login,
                 repo: repo?.name,
                 branch: branch?.name,
               }),
@@ -84,27 +119,20 @@ export function Steps() {
           );
 
           if (!res.ok) {
-            setHasDoneError(true);
+            setHasError(true);
 
             try {
-              setDoneError({ error: await res.text() });
+              setError({ message: await res.text() });
             } catch {}
           }
         } catch (error) {
-          setHasDoneError(true);
+          setHasError(true);
         }
 
         setStep("done");
       })();
     },
     [setBranch, owner, repo]
-  );
-
-  const handleSuccessRepos = useCallback(
-    ({ data }) => {
-      setOwner(data.data.viewer.login);
-    },
-    [setOwner]
   );
 
   const handleChangeRepoKeyword = useCallback(
@@ -115,115 +143,206 @@ export function Steps() {
   );
 
   useEffect(() => {
-    if (owner) {
-      setStep("repos");
-    }
-  }, [owner]);
+    if (step !== "init") return;
+
+    (async () => {
+      try {
+        const { res, data } = await fetchGitHub(queryOrgs);
+
+        if (!res.ok) {
+          if (res.status === 401 || res.status === 403) {
+            onSignOut();
+            return;
+          }
+
+          setHasError(true);
+          setError({ message: "Unknown error" });
+        }
+
+        const { login, avatarUrl } = data.data.viewer;
+
+        setViewer({
+          login,
+          avatarUrl,
+        });
+
+        setOwner({
+          login,
+          avatarUrl,
+        });
+
+        setOrgs(data.data.viewer.organizations.edges.map((edge) => edge.node));
+      } catch (error) {}
+    })();
+  }, [step, onSignOut]);
 
   const configureGitHubAppLink = (
     <a
       href={`https://github.com/apps/${REACT_APP_GITHUB_APP_SLUG}/installations/new`}
-      target="_blank"
-      rel="noopener noreferrer"
     >
       Configure the WithCanvas app on GitHub.
     </a>
   );
 
+  if (error) {
+    return (
+      <>
+        There was an error, please try clearing your session data and try again
+        or come back later.
+      </>
+    );
+  }
+
+  if (!viewer) {
+    return (
+      <div className="d-flex justify-content-center p-2">
+        <Spinner animation="border" size="lg" role="status">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      </div>
+    );
+  }
+
   return (
-    <div>
-      <div className="my-3">
-        {step !== "init" && (
-          <button className="btn btn-secondary" onClick={handleClickReset}>
-            Start over
-          </button>
+    <>
+      <div className="mb-3 d-flex justify-content-between align-items-center">
+        <div className="d-flex">
+          <Dropdown>
+            <Dropdown.Toggle variant="secondary">
+              <img
+                src={owner?.avatarUrl}
+                alt=""
+                height="20"
+                width="20"
+                className="mr-2"
+              />{" "}
+              {owner?.login}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {isOwnerMe ? null : (
+                <>
+                  <Dropdown.Item onClick={handleClickMe}>
+                    <img
+                      src={viewer.avatarUrl}
+                      alt=""
+                      height="20"
+                      width="20"
+                      className="mr-2"
+                    />
+                    {viewer.login}
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                </>
+              )}
+              {orgs?.length ? (
+                <>
+                  {orgs.map((org) => (
+                    <Dropdown.Item
+                      key={org.id}
+                      onClick={(e) => handleClickOrg(e, { item: org })}
+                    >
+                      <img
+                        src={org.avatarUrl}
+                        alt=""
+                        height="20"
+                        width="20"
+                        className="mr-2"
+                      />
+                      {org.login}
+                    </Dropdown.Item>
+                  ))}
+                  <Dropdown.Divider />
+                </>
+              ) : null}
+              <Dropdown.Item
+                href={`https://github.com/apps/${REACT_APP_GITHUB_APP_SLUG}/installations/new`}
+              >
+                Don't see your organization?
+                <br />
+                Configure the WithCanvas app on GitHub.
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          <div className="ml-3 d-flex align-items-center">
+            {repo?.name} {branch?.name ? <>@ {branch?.name}</> : null}
+          </div>
+        </div>
+
+        {step === "init" && (
+          <div>
+            <DebounceInput
+              value={repoKeyword}
+              onChange={handleChangeRepoKeyword}
+              debounceTimeout={300}
+              placeholder="Search"
+              className="form-control my-3"
+            />
+          </div>
         )}
       </div>
-      <div className="my-3">
-        {owner}
-        {owner ? "/" : ""}
-        {repo?.name}
-        {owner && branch?.name ? "@" : ""}
-        {branch?.name}
-      </div>
+
       {step === "init" && (
-        <div>
-          <div className="my-3">Which GitHub repos?</div>
-          <button className="btn btn-primary mr-3" onClick={handleClickMine}>
-            My repos
-          </button>{" "}
-          <button className="btn btn-secondary" onClick={handleClickOrgs}>
-            Org repos
-          </button>
-        </div>
-      )}
-      {step === "orgs" && (
-        <Step
-          query={queryOrgs}
-          getConnection={(data) => data.data.viewer.organizations}
-          handleEvent={handleClickOrg}
-        >
-          {({ item }) => item.name + " " + item.login}
-        </Step>
-      )}
-      {step === "repos" && (
         <>
-          <DebounceInput
-            value={repoKeyword}
-            onChange={handleChangeRepoKeyword}
-            debounceTimeout={300}
-            placeholder="Search"
-            className="form-control my-3"
-          />
-          {repoKeyword ? (
-            <Step
-              query={querySearchRepos}
-              variables={{
-                query: `${
-                  // TODO: Ensure proper escaping.
-                  repoKeyword.replace(/:/g, "\\:")
-                } in:name ${isOwnerMe ? "user" : "org"}:${owner}`,
-              }}
-              getConnection={(data) => data.data.search}
-              onSuccess={handleSuccessRepos}
-              handleEvent={handleClickRepo}
-            >
-              {({ item }) => item.name}
-            </Step>
-          ) : isOwnerMe ? (
-            <Step
-              query={queryMyRepos}
-              getConnection={(data) => data.data.viewer.repositories}
-              onSuccess={handleSuccessRepos}
-              handleEvent={handleClickRepo}
-            >
-              {({ item }) => item.name}
-            </Step>
-          ) : (
-            <Step
-              query={queryOrgRepos}
-              variables={{ owner }}
-              getConnection={(data) => data.data.organization.repositories}
-              handleEvent={handleClickRepo}
-            >
-              {({ item }) => item.name}
-            </Step>
+          {owner && (
+            <>
+              {repoKeyword ? (
+                <Step
+                  typePlural="repositories"
+                  query={querySearchRepos}
+                  variables={{
+                    query: `${
+                      // TODO: Ensure proper escaping.
+                      repoKeyword.replace(/:/g, "\\:")
+                    } in:name ${isOwnerMe ? "user" : "org"}:${owner.login}`,
+                  }}
+                  getConnection={(data) => data.data.search}
+                  handleEvent={handleClickRepo}
+                  onSignOut={onSignOut}
+                >
+                  {renderRepoItem}
+                </Step>
+              ) : isOwnerMe ? (
+                <Step
+                  typePlural="repositories"
+                  query={queryMyRepos}
+                  getConnection={(data) => data.data.viewer.repositories}
+                  handleEvent={handleClickRepo}
+                  onSignOut={onSignOut}
+                >
+                  {renderRepoItem}
+                </Step>
+              ) : (
+                <Step
+                  typePlural="repositories"
+                  query={queryOrgRepos}
+                  variables={{ owner: owner?.login }}
+                  getConnection={(data) => data.data.organization.repositories}
+                  handleEvent={handleClickRepo}
+                  onSignOut={onSignOut}
+                >
+                  {renderRepoItem}
+                </Step>
+              )}
+              <div className="my-3">
+                Don't see your repository? {configureGitHubAppLink}
+              </div>
+            </>
           )}
-          <div className="my-3">
-            Don't see your repo? {configureGitHubAppLink}
-          </div>
         </>
       )}
       {step === "branches" && (
         <>
           <Step
+            typePlural="branches"
             query={queryBranches}
             variables={{
-              owner,
+              owner: owner?.login,
               name: repo?.name,
             }}
             getConnection={(data) => data.data.repository.refs}
             handleEvent={handleClickBranch}
+            onSignOut={onSignOut}
           >
             {({ item }) => item.name}
           </Step>
@@ -234,15 +353,33 @@ export function Steps() {
       )}
       {step === "done" && (
         <div>
-          {hasDoneError ? (
+          {hasError ? (
             <div>
-              {doneError ? `Error: ${doneError.error}` : "Unknown error."}
+              {error && error.message
+                ? `Error: ${error.message}`
+                : "Unknown error."}
             </div>
           ) : (
             <h3>Done!</h3>
           )}
         </div>
       )}
-    </div>
+      {step !== "init" && (
+        <div className="my-3">
+          <button className="btn btn-secondary" onClick={handleClickReset}>
+            Start over
+          </button>
+        </div>
+      )}
+      {step === "init" && (
+        <div className="my-3">
+          <button className="btn btn-secondary" onClick={onSignOut}>
+            Sign out
+          </button>{" "}
+          Want to use a different account? Sign out at{" "}
+          <a href="https://github.com">GitHub</a>.
+        </div>
+      )}
+    </>
   );
 }
