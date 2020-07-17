@@ -26,7 +26,7 @@ Instead, use the Netlify local proxy at:
 http://localhost:8888
 
 Functions will be at, e.g.:
-http://localhost:8888/.netlify/functions/github-oauth
+http://localhost:8888/.netlify/functions/oauth-github
 
 ## Environment variables
 

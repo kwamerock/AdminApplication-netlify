@@ -16,7 +16,7 @@ export function RepoPicker() {
     window.location.href = `https://github.com/login/oauth/authorize?client_id=${REACT_APP_GITHUB_APP_CLIENT_ID}&scope=${encodeURIComponent(
       githubScopes.join(",")
     )}&redirect_uri=${encodeURIComponent(
-      `${REACT_APP_BASE_URL}/.netlify/functions/github-oauth`
+      `${REACT_APP_BASE_URL}/.netlify/functions/oauth-github`
     )}`;
   }, []);
 
