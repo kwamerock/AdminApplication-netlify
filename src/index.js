@@ -53,7 +53,6 @@ const { PUBLIC_URL } = process.env;
  * @see https://github.com/axios/axios#interceptors
  */
 _redux.setupAxios(axios, store);
-console.log(config)
 ReactDOM.render(
   <MetronicI18nProvider>
     <MetronicLayoutProvider>

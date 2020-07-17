@@ -33,7 +33,7 @@ const mainConfig = function () {
 			filename: "[name].js"
 		},
 		resolve: {
-			extensions: ['.scss', '.jsx']
+			extensions: ['.scss']
 		},
 		plugins: [
 			// webpack log message
@@ -73,19 +73,6 @@ const mainConfig = function () {
 							}
 						},
 					]
-				},
-				{
-					test: /\.(js|jsx)$/,
-
-					use: [{
-						loader: "babel-loader",
-						options: {
-							presets: ['@babel/preset-env',
-									  '@babel/react',{
-									  'plugins': ['@babel/plugin-proposal-class-properties']}]
-						}
-					}],
-					
 				}
 			]
 		},
