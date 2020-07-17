@@ -3,14 +3,14 @@
 import React, {useMemo} from "react";
 import {Link} from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
-import {useSelector} from "react-redux";
 import objectPath from "object-path";
 import {useHtmlClassService} from "../../../_core/MetronicLayout";
 import {toAbsoluteUrl} from "../../../../_helpers";
 import {DropdownTopbarItemToggler} from "../../../../_partials/dropdowns";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export function UserProfileDropdown() {
-  const {user} = useSelector(state => state.auth);
+  let { user } = useAuth0();
 
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {

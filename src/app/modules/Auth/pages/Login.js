@@ -2,16 +2,14 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {injectIntl } from "react-intl";
 import * as auth from "../_redux/authRedux";
-import auth0 from '../../../../plugins/auth0'
-
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Login(props) {
+  const { loginWithRedirect } = useAuth0();
 
   useEffect(() => {
-    auth0.loginWithRedirect().catch(() => {
-      console.error('error logging in');
-    });
-  }, []); 
+    loginWithRedirect();
+  }); 
 
   return (
     <div>

@@ -32,7 +32,9 @@ const mainConfig = function () {
 			// output path based on the entries' filename
 			filename: "[name].js"
 		},
-		resolve: {extensions: ['.scss']},
+		resolve: {
+			extensions: ['.scss', '.jsx']
+		},
 		plugins: [
 			// webpack log message
 			new WebpackMessages({
@@ -72,6 +74,19 @@ const mainConfig = function () {
 						},
 					]
 				},
+				{
+					test: /\.(js|jsx)$/,
+
+					use: [{
+						loader: "babel-loader",
+						options: {
+							presets: ['@babel/preset-env',
+									  '@babel/react',{
+									  'plugins': ['@babel/plugin-proposal-class-properties']}]
+						}
+					}],
+					
+				}
 			]
 		},
 	}

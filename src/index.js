@@ -27,6 +27,9 @@ import {
 import {MetronicI18nProvider} from "./_metronic/i18n";
 import * as Sentry from '@sentry/react';
 
+import { Auth0Provider } from "@auth0/auth0-react";
+import config from "./config";
+
 Sentry.init({dsn: process.env.REACT_APP_SENTRY_DSN});
 
 /**
@@ -50,13 +53,21 @@ const { PUBLIC_URL } = process.env;
  * @see https://github.com/axios/axios#interceptors
  */
 _redux.setupAxios(axios, store);
-
+console.log(config)
 ReactDOM.render(
   <MetronicI18nProvider>
     <MetronicLayoutProvider>
       <MetronicSubheaderProvider>
         <MetronicSplashScreenProvider>
-          <App store={store} persistor={persistor} basename={PUBLIC_URL} />
+          <Auth0Provider
+            domain={config.auth0.domain}
+            clientId={config.auth0.clientId}
+            redirectUri={config.auth0.callbackUrl}
+            audience={config.auth0.audience}
+            scope="openid email read:users"
+          >
+            <App store={store} persistor={persistor} basename={PUBLIC_URL} />
+          </Auth0Provider>,
         </MetronicSplashScreenProvider>
       </MetronicSubheaderProvider>
     </MetronicLayoutProvider>

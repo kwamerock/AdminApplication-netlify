@@ -1,5 +1,8 @@
 export default {
     auth0: {
-        callbackUrl: 'http://localhost:3000/auth/loginCallback'
+        domain: process.env.REACT_APP_AUTH0_DOMAIN,
+        clientId: process.env.REACT_APP_AUTH0_CLIENT_ID,
+        audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+        callbackUrl: process.env.REACT_APP_BASE_URL
     }
 }

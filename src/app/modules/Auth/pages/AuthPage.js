@@ -3,7 +3,6 @@ import React from "react";
 import {Link, Switch, Redirect} from "react-router-dom";
 import {ContentRoute} from "../../../../_metronic/layout"
 import Login from "./Login";
-import LoginCallback from "./LoginCallback";
 import "../../../../_metronic/_assets/sass/pages/login/classic/login-1.scss";
 
 export function AuthPage() {
@@ -14,7 +13,6 @@ export function AuthPage() {
             <div>
               <Switch>
               <ContentRoute path="/auth/login" component={Login}/>
-              <ContentRoute path="/auth/loginCallback" component={LoginCallback}/>
               <Redirect from="/auth" exact={true} to="/auth/login"/>
               <Redirect to="/auth/login"/>
             </Switch>
