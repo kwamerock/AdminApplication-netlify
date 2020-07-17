@@ -123,6 +123,8 @@ export function Steps() {
   const configureGitHubAppLink = (
     <a
       href={`https://github.com/apps/${REACT_APP_GITHUB_APP_SLUG}/installations/new`}
+      target="_blank"
+      rel="noopener noreferrer"
     >
       Configure the WithCanvas app on GitHub.
     </a>
