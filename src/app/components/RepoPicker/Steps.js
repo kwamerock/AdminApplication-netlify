@@ -11,6 +11,7 @@ import {
 import { Step } from "./Step";
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
+const REACT_APP_GITHUB_APP_SLUG = process.env.REACT_APP_GITHUB_APP_SLUG;
 
 export function Steps() {
   const [step, setStep] = useState("init");
@@ -27,6 +28,9 @@ export function Steps() {
     setOwner(undefined);
     setRepo(undefined);
     setBranch(undefined);
+    setRepoKeyword(undefined);
+    setHasDoneError(undefined);
+    setDoneError(undefined);
     setStep("init");
   }, [setStep]);
 
@@ -116,6 +120,14 @@ export function Steps() {
     }
   }, [owner]);
 
+  const configureGitHubAppLink = (
+    <a
+      href={`https://github.com/apps/${REACT_APP_GITHUB_APP_SLUG}/installations/new`}
+    >
+      Configure the WithCanvas app on GitHub.
+    </a>
+  );
+
   return (
     <div>
       <div className="my-3">
@@ -195,20 +207,28 @@ export function Steps() {
               {({ item }) => item.name}
             </Step>
           )}
+          <div className="my-3">
+            Don't see your repo? {configureGitHubAppLink}
+          </div>
         </>
       )}
       {step === "branches" && (
-        <Step
-          query={queryBranches}
-          variables={{
-            owner,
-            name: repo?.name,
-          }}
-          getConnection={(data) => data.data.repository.refs}
-          handleEvent={handleClickBranch}
-        >
-          {({ item }) => item.name}
-        </Step>
+        <>
+          <Step
+            query={queryBranches}
+            variables={{
+              owner,
+              name: repo?.name,
+            }}
+            getConnection={(data) => data.data.repository.refs}
+            handleEvent={handleClickBranch}
+          >
+            {({ item }) => item.name}
+          </Step>
+          <div className="my-3">
+            Don't see your branch? {configureGitHubAppLink}
+          </div>
+        </>
       )}
       {step === "done" && (
         <div>

@@ -40,7 +40,6 @@ export const Step = ({
 
   const fetchConnection = useCallback(
     async ({ cursor }) => {
-      console.log("fetching", query, variables);
       const { data } = await fetchGitHub(query, {
         cursor,
         ...variables,
