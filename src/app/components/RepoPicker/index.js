@@ -22,7 +22,7 @@ export function RepoPicker() {
     )}`;
   }, []);
 
-  const handleLogout = useCallback(() => {
+  const handleLogOut = useCallback(() => {
     removeAccessTokenGitHub();
     setAccessTokenGitHub(undefined);
   }, []);
@@ -41,7 +41,7 @@ export function RepoPicker() {
         </button>
       ) : (
         <>
-          <Steps onSignOut={handleLogout} />
+          <Steps onLogOut={handleLogOut} />
         </>
       )}
     </div>

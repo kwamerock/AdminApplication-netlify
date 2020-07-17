@@ -28,7 +28,7 @@ const renderRepoItem = ({ item }) => (
   </div>
 );
 
-export function Steps({ onSignOut }) {
+export function Steps({ onLogOut }) {
   const [step, setStep] = useState("init");
   const [owner, setOwner] = useState();
   const [viewer, setViewer] = useState();
@@ -49,15 +49,7 @@ export function Steps({ onSignOut }) {
     setHasError(undefined);
     setError(undefined);
     setStep("init");
-  }, [
-    setOwner,
-    setRepo,
-    setBranch,
-    setRepoKeyword,
-    setHasError,
-    setError,
-    setStep,
-  ]);
+  }, []);
 
   const handleClickMe = useCallback(
     (e) => {
@@ -67,7 +59,7 @@ export function Steps({ onSignOut }) {
 
       setOwner(viewer);
     },
-    [viewer, setOwner, setIsOwnerMe, handleClickReset]
+    [viewer, handleClickReset]
   );
 
   const handleClickOrg = useCallback(
@@ -83,18 +75,13 @@ export function Steps({ onSignOut }) {
         avatarUrl,
       });
     },
-    [setOwner, setIsOwnerMe, handleClickReset]
+    [handleClickReset]
   );
 
-  const handleClickRepo = useCallback(
-    (e, { item: clickedRepo }) => {
-      (async () => {
-        setRepo(clickedRepo);
-        setStep("branches");
-      })();
-    },
-    [setRepo, setStep]
-  );
+  const handleClickRepo = useCallback((e, { item: clickedRepo }) => {
+    setRepo(clickedRepo);
+    setStep("branches");
+  }, []);
 
   const handleClickBranch = useCallback(
     (e, { item: branch }) => {
@@ -132,15 +119,12 @@ export function Steps({ onSignOut }) {
         setStep("done");
       })();
     },
-    [setBranch, owner, repo]
+    [owner, repo]
   );
 
-  const handleChangeRepoKeyword = useCallback(
-    (e) => {
-      setRepoKeyword(e.target.value);
-    },
-    [setRepoKeyword]
-  );
+  const handleChangeRepoKeyword = useCallback((e) => {
+    setRepoKeyword(e.target.value);
+  }, []);
 
   useEffect(() => {
     if (step !== "init") return;
@@ -151,7 +135,7 @@ export function Steps({ onSignOut }) {
 
         if (!res.ok) {
           if (res.status === 401 || res.status === 403) {
-            onSignOut();
+            onLogOut();
             return;
           }
 
@@ -174,7 +158,7 @@ export function Steps({ onSignOut }) {
         setOrgs(data.data.viewer.organizations.edges.map((edge) => edge.node));
       } catch (error) {}
     })();
-  }, [step, onSignOut]);
+  }, [step, onLogOut]);
 
   const configureGitHubAppLink = (
     <a
@@ -298,7 +282,7 @@ export function Steps({ onSignOut }) {
                   }}
                   getConnection={(data) => data.data.search}
                   handleEvent={handleClickRepo}
-                  onSignOut={onSignOut}
+                  onLogOut={onLogOut}
                 >
                   {renderRepoItem}
                 </Step>
@@ -308,7 +292,7 @@ export function Steps({ onSignOut }) {
                   query={queryMyRepos}
                   getConnection={(data) => data.data.viewer.repositories}
                   handleEvent={handleClickRepo}
-                  onSignOut={onSignOut}
+                  onLogOut={onLogOut}
                 >
                   {renderRepoItem}
                 </Step>
@@ -319,7 +303,7 @@ export function Steps({ onSignOut }) {
                   variables={{ owner: owner?.login }}
                   getConnection={(data) => data.data.organization.repositories}
                   handleEvent={handleClickRepo}
-                  onSignOut={onSignOut}
+                  onLogOut={onLogOut}
                 >
                   {renderRepoItem}
                 </Step>
@@ -342,7 +326,7 @@ export function Steps({ onSignOut }) {
             }}
             getConnection={(data) => data.data.repository.refs}
             handleEvent={handleClickBranch}
-            onSignOut={onSignOut}
+            onLogOut={onLogOut}
           >
             {({ item }) => item.name}
           </Step>
@@ -373,7 +357,7 @@ export function Steps({ onSignOut }) {
       )}
       {step === "init" && (
         <div className="my-3">
-          <button className="btn btn-secondary" onClick={onSignOut}>
+          <button className="btn btn-secondary" onClick={onLogOut}>
             Sign out
           </button>{" "}
           Want to use a different account? Sign out at{" "}

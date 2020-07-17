@@ -37,7 +37,7 @@ export const Step = ({
   getConnection,
   handleEvent,
   onSuccess,
-  onSignOut,
+  onLogOut,
   typePlural = "items",
 }) => {
   const variablesMemo = useMemo(
@@ -55,7 +55,7 @@ export const Step = ({
 
       if (!res.ok) {
         if (res.status === 401 || res.status === 403) {
-          onSignOut();
+          onLogOut();
           return;
         }
         // TODO: Other error handling.
