@@ -1,5 +1,5 @@
-import React, { useCallback } from "react";
-import { getAccessTokenGitHub } from "./getAccessToken";
+import React, { useCallback, useState } from "react";
+import { getAccessTokenGitHub, removeAccessTokenGitHub } from "./accessToken";
 import { Steps } from "./Steps";
 
 const REACT_APP_BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -10,14 +10,21 @@ const REACT_APP_GITHUB_APP_CLIENT_ID =
 const githubScopes = ["repo", "read:org", "write:repo_hook"];
 
 export function RepoPicker() {
-  const accessTokenGitHub = getAccessTokenGitHub();
+  const [accessTokenGitHub, setAccessTokenGitHub] = useState(
+    getAccessTokenGitHub()
+  );
 
   const handleClickLogin = useCallback(() => {
     window.location.href = `https://github.com/login/oauth/authorize?client_id=${REACT_APP_GITHUB_APP_CLIENT_ID}&scope=${encodeURIComponent(
       githubScopes.join(",")
     )}&redirect_uri=${encodeURIComponent(
-      `${REACT_APP_BASE_URL}/.netlify/functions/github-oauth`
+      `${REACT_APP_BASE_URL}/.netlify/functions/oauth-github`
     )}`;
+  }, []);
+
+  const handleLogOut = useCallback(() => {
+    removeAccessTokenGitHub();
+    setAccessTokenGitHub(undefined);
   }, []);
 
   return (
@@ -25,12 +32,16 @@ export function RepoPicker() {
       <h2>Pick a repository &amp; branch</h2>
 
       {!accessTokenGitHub ? (
-        <button className="btn btn-primary" onClick={handleClickLogin}>
-          Login with GitHub
+        <button
+          className="btn btn-secondary d-flex align-items-center"
+          onClick={handleClickLogin}
+        >
+          <img src="/media/svg/logos/github-1.svg" height="24" alt="" />{" "}
+          <span className="ml-3">GitHub</span>
         </button>
       ) : (
         <>
-          <Steps />
+          <Steps onLogOut={handleLogOut} />
         </>
       )}
     </div>

@@ -20,7 +20,7 @@ exports.handler = async (event, context, callback) => {
   const params = {
     client_id: REACT_APP_GITHUB_APP_CLIENT_ID,
     client_secret: GITHUB_APP_CLIENT_SECRET,
-    redirect_uri: `${REACT_APP_BASE_URL}/.netlify/functions/github-oauth`, // Or configured in GitHub OAuth app.
+    redirect_uri: `${REACT_APP_BASE_URL}/.netlify/functions/oauth-github`, // Or configured in GitHub OAuth app.
     code,
   };
 
@@ -43,7 +43,7 @@ exports.handler = async (event, context, callback) => {
       Location: `${REACT_APP_BASE_URL}/builds`,
       "Set-Cookie": `accessTokenGitHub=${encodeURIComponent(
         access_token
-      )}; Path=/`, // TODO: set expires/max-age, etc.?
+      )}; Path=/`, // TODO: set expires/max-age, etc.? otherwise it's a session cookie
     },
   });
 };

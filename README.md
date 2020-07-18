@@ -26,7 +26,7 @@ Instead, use the Netlify local proxy at:
 http://localhost:8888
 
 Functions will be at, e.g.:
-http://localhost:8888/.netlify/functions/github-oauth
+http://localhost:8888/.netlify/functions/oauth-github
 
 ## Environment variables
 
@@ -38,23 +38,7 @@ We have `REACT_APP*` ones since `react-scripts` from `create-react-app` won't le
 
 This is a Google Cloud function based on https://github.com/kelseyhightower/reposync
 
-Build with:
-
-```
-$ go get -d ./...
-
-$ go get -u golang.org/x/sys/unix
-
-$ GOOS=linux go build -o function .
-```
-
-Deploy with:
-
-```
-$ gcloud alpha functions add-iam-policy-binding reposync --member=allUsers --role=roles/cloudfunctions.invoker
-
-$ gcloud beta functions deploy reposync --entry-point F --trigger-http --allow-unauthenticated --runtime nodejs10 --set-env-vars GCP_PROJECT=canvas-application,GITHUB_WEBHOOK_SECRET=de5bc0c5a30e523000509e5d66e06a6f6752ee30
-```
+See https://github.com/WithCanvas/reposync#readme.
 
 ## Etc.
 
