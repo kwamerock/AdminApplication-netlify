@@ -7,7 +7,8 @@ function Logout() {
   const { logout } = useAuth0();
   logout();
 
-  return(<></>);
+  return null;
+
 }
 
 export default injectIntl(Logout);
