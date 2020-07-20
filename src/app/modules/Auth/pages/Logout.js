@@ -10,4 +10,4 @@ function Logout() {
   return(<></>);
 }
 
-export default injectIntl(connect(null, null)(Logout));
+export default injectIntl(Logout);
