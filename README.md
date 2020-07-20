@@ -1,3 +1,47 @@
+# Canvas
+
+## Dev
+
+To run in dev including our Netlify functions:
+
+```
+npm run dev
+```
+
+Wait a while til it says:
+
+```
+Compiled successfully!
+```
+
+Or:
+
+```
+Files successfully emitted, waiting for typecheck results...
+```
+
+Ignore the `react-scripts` URL (`http://localhost:3000/`).
+
+Instead, use the Netlify local proxy at:
+http://localhost:8888
+
+Functions will be at, e.g.:
+http://localhost:8888/.netlify/functions/oauth-github
+
+## Environment variables
+
+See [`.env.example`](.env.example) and copy these to `.env` for local dev and edit the values as needed.
+
+We have `REACT_APP*` ones since `react-scripts` from `create-react-app` won't let you use unprefixed ones.
+
+## reposync
+
+This is a Google Cloud function based on https://github.com/kelseyhightower/reposync
+
+See https://github.com/WithCanvas/reposync#readme.
+
+## Etc.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
