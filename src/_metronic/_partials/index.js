@@ -1,6 +1,7 @@
 export {Dashboard} from "./dashboards/Dashboard";
 export {Builder} from "./builder/Builder";
 
+export {Profile} from "./dashboards/Profile";
 export {Sites} from "./dashboards/Sites";
 export {Builds} from "./dashboards/Builds";
 export {AuditLog} from "./dashboards/AuditLog";
