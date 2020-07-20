@@ -9,7 +9,7 @@ function Login(props) {
 
   useEffect(() => {
     loginWithRedirect();
-  }); 
+  }, []); 
 
   return (
     <div>
