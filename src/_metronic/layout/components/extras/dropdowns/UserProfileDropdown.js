@@ -3,14 +3,14 @@
 import React, {useMemo} from "react";
 import {Link} from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
-import {useSelector} from "react-redux";
 import objectPath from "object-path";
 import {useHtmlClassService} from "../../../_core/MetronicLayout";
 import {toAbsoluteUrl} from "../../../../_helpers";
 import {DropdownTopbarItemToggler} from "../../../../_partials/dropdowns";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export function UserProfileDropdown() {
-  const {user} = useSelector(state => state.auth);
+  let { user } = useAuth0();
 
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {
@@ -25,13 +25,13 @@ export function UserProfileDropdown() {
             as={DropdownTopbarItemToggler}
             id="dropdown-toggle-user-profile"
         >
-          <div className={"btn btn-icon btn-hover-transparent-white d-flex align-items-center btn-lg px-md-2 w-md-auto"}>
+          <div className={"btn btn-icon btn-hover-transparent-white d-flex align-items-center btn-lg px-md-2 w-auto"}>
             <span className="text-white opacity-70 font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>         
             <span className="text-white opacity-90 font-weight-bolder font-size-base d-none d-md-inline mr-4">
               {user.fullname}
             </span>
             <span className="symbol symbol-35">            
-              <span className="symbol-label text-white font-size-h5 font-weight-bold bg-white-o-30">{user.fullname[0]}</span>
+              <span className="symbol-label text-white font-size-h5 font-weight-bold bg-white-o-30 username-label">{user.name}</span>
             </span>
           </div>
         </Dropdown.Toggle>
@@ -73,7 +73,7 @@ export function UserProfileDropdown() {
           </>
 
           <div className="navi navi-spacer-x-0 pt-5">
-            <a className="navi-item px-8" href="/Sites">
+            <a className="navi-item px-8" href="/profile">
               <div className="navi-link">
                 <div className="navi-icon mr-2">
                   <i className="flaticon2-calendar-3 text-success"/>
